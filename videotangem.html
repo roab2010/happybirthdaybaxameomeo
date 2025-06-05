@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Video Tặng Em</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap" rel="stylesheet" />
+    <style>
+        body {
+            margin: 0;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            max-height: 100vh;
+            transition: opacity 1s ease;
+            opacity: 1;
+        }
+
+        #startBtn {
+            position: absolute;
+            z-index: 999;
+            padding: 20px 40px;
+            font-size: 1.8rem;
+            background-color: #ff90bc;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(255, 144, 188, 0.4);
+            transition: background 0.3s, transform 0.2s;
+            font-family: 'Pacifico', cursive;
+        }
+
+        #startBtn:hover {
+            background-color: #ff5fa2;
+            transform: scale(1.05);
+        }
+
+        #letter {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+            font-size: 1.5rem;
+            z-index: 10;
+            opacity: 0;
+            transition: top 1s ease, opacity 1s ease;
+        }
+
+        #letter.show {
+            top: 0;
+            opacity: 1;
+        }
+
+        #letter h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3rem;
+            color: #ff90bc;
+            margin-bottom: 20px;
+        }
+
+        #letter p {
+            max-width: 700px;
+            line-height: 1.8;
+        }
+
+        .fade-out {
+            opacity: 0 !important;
+        }
+
+        .heart {
+            position: absolute;
+            top: -20px;
+            font-size: 24px;
+            animation: fall 5s linear forwards;
+            z-index: 50;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <video id="videoPlayer"></video>
+    <button id="startBtn" onclick="startVideo()">🎬 Bắt đầu</button>
+
+    <div id="letter">
+        <h1>Chúc mừng sinh nhật vợ yêu 💖</h1>
+        <p id="typewriter"></p>
+    </div>
+
+    <audio id="bgMusic" src="/assset/music/loveis.mp3" type="audio/mpeg" loop></audio>
+
+    <script>
+        const videoList = [
+            '/assset/video/1.mp4', '/assset/video/2.mp4', '/assset/video/3.mp4', '/assset/video/4.mp4',
+            '/assset/video/5.mp4', '/assset/video/6.mp4', '/assset/video/7.mp4', '/assset/video/8.mp4',
+            '/assset/video/9.mp4', '/assset/video/10.mp4', '/assset/video/11.mp4', '/assset/video/12.mp4',
+            '/assset/video/13.mp4', '/assset/video/14.mp4'
+        ];
+
+        const videoElement = document.getElementById('videoPlayer');
+        const letter = document.getElementById('letter');
+        const bgMusic = document.getElementById('bgMusic');
+        const typewriter = document.getElementById('typewriter');
+        const startBtn = document.getElementById('startBtn');
+        let currentIndex = 0;
+
+        function playVideo(index) {
+            videoElement.classList.add('fade-out');
+            setTimeout(() => {
+                videoElement.src = videoList[index];
+                videoElement.load();
+                videoElement.play();
+                videoElement.classList.remove('fade-out');
+            }, 800);
+        }
+
+        videoElement.addEventListener('ended', () => {
+            currentIndex++;
+            if (currentIndex < videoList.length) {
+                playVideo(currentIndex);
+            } else {
+                videoElement.classList.add('fade-out');
+                setTimeout(() => {
+                    videoElement.style.display = 'none';
+                    letter.classList.add('show');
+                    bgMusic.volume = 0.5;
+                    bgMusic.play();
+                    typeMessage(`Hôm nay là một ngày đặc biệt, và anh chỉ muốn nói rằng...\n
+Anh cảm ơn em vì đã đồng hành cùng anh, vì nụ cười, vì ánh mắt và cả những lần dỗi hờn dễ thương nữa 😚\n\n
+Chúc bà xã của anh luôn xinh đẹp, vui vẻ và hạnh phúc trọn đời nha 💐\n
+Anh sẽ luôn cố gắng mỗi ngày để xứng đáng hơn với em. Yêu em nhiều thật nhiều 💘`);
+
+                    startHeartRain(); // bắt đầu rơi tim
+                }, 1000);
+            }
+        });
+
+        function typeMessage(text) {
+            let index = 0;
+            const typingSpeed = 50;
+
+            function type() {
+                if (index < text.length) {
+                    const char = text[index];
+                    typewriter.innerHTML += char === '\n' ? '<br>' : char;
+                    index++;
+                    setTimeout(type, typingSpeed);
+                }
+            }
+            type();
+        }
+
+        function startVideo() {
+            startBtn.style.display = 'none';
+            videoElement.muted = false;
+            playVideo(currentIndex);
+            bgMusic.volume = 0.5;
+            bgMusic.play();
+        }
+
+        function startHeartRain() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerText = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = Math.random() * 20 + 20 + 'px';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
+            }, 300);
+        }
+
+        window.onload = () => {
+            videoElement.removeAttribute('controls');
+        };
+    </script>
+</body>
+
+</html>
