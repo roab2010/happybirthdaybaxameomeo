@@ -25,23 +25,54 @@
             opacity: 1;
         }
 
-        #startBtn {
+        #startScreen {
             position: absolute;
             z-index: 999;
-            padding: 20px 40px;
-            font-size: 1.8rem;
-            background-color: #ff90bc;
-            color: white;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #000, #111);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+        }
+
+        #startBtn,
+        #skipBtn {
+            font-family: 'Pacifico', cursive;
+            padding: 15px 30px;
+            font-size: 1.5rem;
             border: none;
             border-radius: 50px;
             cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
             box-shadow: 0 8px 20px rgba(255, 144, 188, 0.4);
-            transition: background 0.3s, transform 0.2s;
-            font-family: 'Pacifico', cursive;
+        }
+
+        #startBtn {
+            background: #ff90bc;
+            color: white;
         }
 
         #startBtn:hover {
             background-color: #ff5fa2;
+            transform: scale(1.05);
+        }
+
+        #skipBtn {
+            background-color: transparent;
+            color: #ff90bc;
+            border: 2px solid #ff90bc;
+            font-size: 1.2rem;
+        }
+
+        #skipBtn:hover {
+            background-color: #ff90bc;
+            color: white;
             transform: scale(1.05);
         }
 
@@ -104,8 +135,12 @@
 </head>
 
 <body>
+    <div id="startScreen">
+        <button id="startBtn">🎬 Bắt đầu</button>
+        <button id="skipBtn">Bỏ qua ➤</button>
+    </div>
+
     <video id="videoPlayer"></video>
-    <button id="startBtn" onclick="startVideo()">🎬 Bắt đầu</button>
 
     <div id="letter">
         <h1>Chúc mừng sinh nhật vợ yêu 💖</h1>
@@ -127,6 +162,9 @@
         const bgMusic = document.getElementById('bgMusic');
         const typewriter = document.getElementById('typewriter');
         const startBtn = document.getElementById('startBtn');
+        const skipBtn = document.getElementById('skipBtn');
+        const startScreen = document.getElementById('startScreen');
+
         let currentIndex = 0;
 
         function playVideo(index) {
@@ -144,25 +182,14 @@
             if (currentIndex < videoList.length) {
                 playVideo(currentIndex);
             } else {
-                videoElement.classList.add('fade-out');
-                setTimeout(() => {
-                    videoElement.style.display = 'none';
-                    letter.classList.add('show');
-                    bgMusic.volume = 0.5;
-                    bgMusic.play();
-                    typeMessage(`Hôm nay là một ngày đặc biệt, và anh chỉ muốn nói rằng...\n
-Anh cảm ơn em vì đã đồng hành cùng anh, vì nụ cười, vì ánh mắt và cả những lần dỗi hờn dễ thương nữa 😚\n\n
-Chúc bà xã của anh luôn xinh đẹp, vui vẻ và hạnh phúc trọn đời nha 💐\n
-Anh sẽ luôn cố gắng mỗi ngày để xứng đáng hơn với em. Yêu em nhiều thật nhiều 💘`);
-
-                    startHeartRain(); // bắt đầu rơi tim
-                }, 1000);
+                showLetter();
             }
         });
 
         function typeMessage(text) {
             let index = 0;
             const typingSpeed = 50;
+            typewriter.innerHTML = '';
 
             function type() {
                 if (index < text.length) {
@@ -173,14 +200,6 @@ Anh sẽ luôn cố gắng mỗi ngày để xứng đáng hơn với em. Yêu e
                 }
             }
             type();
-        }
-
-        function startVideo() {
-            startBtn.style.display = 'none';
-            videoElement.muted = false;
-            playVideo(currentIndex);
-            bgMusic.volume = 0.2;
-            bgMusic.play();
         }
 
         function startHeartRain() {
@@ -194,6 +213,31 @@ Anh sẽ luôn cố gắng mỗi ngày để xứng đáng hơn với em. Yêu e
                 setTimeout(() => heart.remove(), 5000);
             }, 300);
         }
+
+        function showLetter() {
+            videoElement.style.display = 'none';
+            letter.classList.add('show');
+            bgMusic.volume = 0.2;
+            bgMusic.play();
+            typeMessage(`Hôm nay là một ngày đặc biệt, và anh chỉ muốn nói rằng...\n
+Anh cảm ơn em vì đã đồng hành cùng anh, vì nụ cười, vì ánh mắt và cả những lần dỗi hờn dễ thương nữa 😚\n\n
+Chúc bà xã của anh luôn xinh đẹp, vui vẻ và hạnh phúc trọn đời nha 💐\n
+Anh sẽ luôn cố gắng mỗi ngày để xứng đáng hơn với em. Yêu em nhiều thật nhiều 💘`);
+            startHeartRain();
+        }
+
+        startBtn.onclick = () => {
+            startScreen.style.display = 'none';
+            videoElement.muted = false;
+            playVideo(currentIndex);
+            bgMusic.volume = 0.05;
+            bgMusic.play();
+        };
+
+        skipBtn.onclick = () => {
+            startScreen.style.display = 'none';
+            showLetter();
+        };
 
         window.onload = () => {
             videoElement.removeAttribute('controls');
