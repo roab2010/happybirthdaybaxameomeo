@@ -60,7 +60,7 @@
             }
         }
 
-        /* Cake burning styling */
+        /* Cake styling updated */
         #cake-container {
             position: relative;
             width: 200px;
@@ -68,26 +68,13 @@
             margin-bottom: 1rem;
         }
 
-        .cake {
+        #cake-container img {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: auto;
             transition: opacity 0.5s;
-        }
-
-        .burning {
-            animation: flicker 0.2s infinite;
-        }
-
-        @keyframes flicker {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.8;
-            }
         }
 
         /* Fireworks styling */
@@ -123,8 +110,10 @@
         <h1>Happy BirthDay Pthao</h1>
         <h2>21</h2>
         <div id="cake-container">
-            <img src="/assset/images/banhkem.png" alt="Cake Burning" id="cake-burning" class="cake burning" />
-            <img src="/assset/images/banhkem2.png" alt="Cake" id="cake" class="cake" style="opacity: 0;" />
+            <!-- Cake burning image (static) -->
+            <img src="/assset/images/banhkem.png" alt="Cake Burning" id="cake-burning" />
+            <!-- Cake normal image (hidden initially) -->
+            <img src="/assset/images/banhkem2.png" alt="Cake" id="cake" style="opacity: 0;" />
         </div>
         <p id="blow-text" style="font-size:1.25rem; color:#fff; text-shadow:1px 1px 2px rgba(0,0,0,0.2); opacity:1;">Bà
             xã thổi i</p>
@@ -134,16 +123,14 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const candle = document.querySelector('#cake-container .burning');
             const cakeBurn = document.getElementById('cake-burning');
             const cakeNormal = document.getElementById('cake');
             const blowText = document.getElementById('blow-text');
             const fireworksContainer = document.getElementById('fireworks-container');
 
-            // Switch cake after 3.5s then fireworks for 5s
+            // Switch cake after 3.5s then fireworks
             setTimeout(() => {
                 cakeBurn.style.opacity = '0';
-                cakeBurn.classList.remove('burning');
                 cakeNormal.style.opacity = '1';
                 // Fireworks
                 function createFirework(xOrigin) {
