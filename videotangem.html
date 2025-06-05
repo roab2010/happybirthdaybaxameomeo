@@ -131,6 +131,24 @@
                 opacity: 0;
             }
         }
+
+        @media (max-width: 480px) {
+
+            #startBtn,
+            #skipBtn {
+                width: 80%;
+                font-size: 1.2rem;
+                padding: 12px 20px;
+            }
+
+            #letter p {
+                font-size: 1.1rem;
+            }
+
+            #letter h1 {
+                font-size: 2rem;
+            }
+        }
     </style>
 </head>
 
@@ -140,7 +158,7 @@
         <button id="skipBtn">Bỏ qua ➤</button>
     </div>
 
-    <video id="videoPlayer"></video>
+    <video id="videoPlayer" playsinline></video>
 
     <div id="letter">
         <h1>Chúc mừng sinh nhật vợ yêu 💖</h1>
@@ -231,7 +249,9 @@ Anh sẽ luôn cố gắng mỗi ngày để xứng đáng hơn với em. Yêu e
             videoElement.muted = false;
             playVideo(currentIndex);
             bgMusic.volume = 0.05;
-            bgMusic.play();
+            bgMusic.play().catch(e => {
+                console.warn("Không thể phát nhạc:", e);
+            });
         };
 
         skipBtn.onclick = () => {
