@@ -4,20 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Pthao 🎉</title>
+    <title>Happy Birthday 🎉</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap"
         rel="stylesheet">
     <style>
         body {
-            background: #87CEEB;
-            /* Light sky-blue */
+            background: #333333;
             font-family: 'Roboto', sans-serif;
             margin: 0;
             overflow: hidden;
             text-align: center;
-            color: #333;
+            color: #ddd;
         }
 
         .container {
@@ -26,46 +24,95 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            padding: 1rem;
         }
 
-        h1 {
-            font-family: 'Pacifico', cursive;
-            font-size: 2.5rem;
-            color: #FF4500;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-            margin-bottom: 0.5rem;
-            animation: zoomIn 0.8s ease-out;
-        }
-
-        h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #FFD700;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-            margin-bottom: 2rem;
-            animation: zoomIn 0.8s ease-out 0.3s forwards;
+        .fade-in {
             opacity: 0;
+            transform: scale(0.8);
+            animation: fadeIn 1s forwards;
         }
 
-        @keyframes zoomIn {
-            from {
-                transform: scale(0.8);
-                opacity: 0;
-            }
+        .delay-1 {
+            animation-delay: 0.5s;
+        }
 
+        .delay-2 {
+            animation-delay: 2s;
+        }
+
+        .delay-3 {
+            animation-delay: 3.5s;
+        }
+
+        .delay-4 {
+            animation-delay: 5s;
+        }
+
+        .delay-5 {
+            animation-delay: 7s;
+        }
+
+        .delay-6 {
+            animation-delay: 9s;
+        }
+
+        .delay-7 {
+            animation-delay: 12s;
+        }
+
+        .delay-8 {
+            animation-delay: 14s;
+        }
+
+        @keyframes fadeIn {
             to {
-                transform: scale(1);
                 opacity: 1;
+                transform: scale(1);
             }
         }
 
-        /* Cake styling updated */
+        .title {
+            font-family: 'Pacifico', cursive;
+            font-size: 5rem;
+            color: #FF4500;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+        }
+
+        .name {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(270deg, #1E90FF, #00BFFF, #1E90FF);
+            background-size: 600% 600%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientMove 6s ease infinite;
+        }
+
+        @keyframes gradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .age {
+            font-size: 4rem;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+        }
+
         #cake-container {
             position: relative;
-            width: 200px;
-            height: 200px;
-            margin-bottom: 1rem;
+            width: 350px;
+            height: 350px;
+            margin: 2rem 0;
         }
 
         #cake-container img {
@@ -77,16 +124,32 @@
             transition: opacity 0.5s;
         }
 
-        /* Fireworks styling */
+        #fireworks-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
         .firework {
             position: absolute;
-            bottom: 0;
-            width: 4px;
-            height: 4px;
-            background: radial-gradient(circle, white, transparent);
+            width: 8px;
+            height: 8px;
+            background: transparent;
             border-radius: 50%;
             opacity: 0;
             animation: explode 1s ease-out forwards;
+        }
+
+        .firework:after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--color);
         }
 
         @keyframes explode {
@@ -100,67 +163,108 @@
                 transform: translate(var(--dx), var(--dy)) scale(0);
             }
         }
+
+        .message,
+        .button {
+            font-size: 2rem;
+            color: #fff;
+            margin-top: 1rem;
+            opacity: 0;
+        }
+
+        .button button {
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            font-size: 1.5rem;
+            background: #1E90FF;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .button button:hover {
+            background: #63b3ed;
+        }
     </style>
 </head>
 
 <body>
-    <audio id="bg-music" src="birthday-music.mp3" loop autoplay></audio>
+    <audio id="bg-music" src="/assset/music/nhacsinhnhat.mp3" loop autoplay></audio>
+    <audio id="fire-sound" src="/assset/music/firesound.mp3"></audio>
 
     <div class="container">
-        <h1>Happy BirthDay Pthao</h1>
-        <h2>21</h2>
-        <div id="cake-container">
-            <!-- Cake burning image (static) -->
-            <img src="/assset/images/banhkem.png" alt="Cake Burning" id="cake-burning" />
-            <!-- Cake normal image (hidden initially) -->
-            <img src="/assset/images/banhkem2.png" alt="Cake" id="cake" style="opacity: 0;" />
+        <div class="title fade-in delay-1">Happy BirthDay</div>
+        <div class="name fade-in delay-2">Nguyễn Thị Phương Thảo</div>
+        <div class="age fade-in delay-3">21 Tuổi</div>
+
+        <div id="cake-container" class="fade-in delay-4" style="opacity:0;">
+            <img src="/assset/images/banhkem2.png" alt="Cake" id="cake2" style="opacity:1;">
+            <img src="/assset/images/banhkem.png" alt="Cake Burning" id="cake-burning" style="opacity:0;">
         </div>
-        <p id="blow-text" style="font-size:1.25rem; color:#fff; text-shadow:1px 1px 2px rgba(0,0,0,0.2); opacity:1;">Bà
-            xã thổi i</p>
+
+        <div id="fireworks-container"></div>
+        <div id="msg" class="message fade-in delay-7">Bà xã đeo tai nghe AirPods oxa tặng vô đi đã</div>
+        <div id="btn-wrap" class="button fade-in delay-8"><button onclick="window.location.href='deotainghe.html'">Dạ em
+                đeo gòi</button></div>
     </div>
 
-    <div id="fireworks-container"></div>
-
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const cakeBurn = document.getElementById('cake-burning');
-            const cakeNormal = document.getElementById('cake');
-            const blowText = document.getElementById('blow-text');
-            const fireworksContainer = document.getElementById('fireworks-container');
+        const cake2 = document.getElementById('cake2');
+        const cakeBurn = document.getElementById('cake-burning');
+        const fireSound = document.getElementById('fire-sound');
+        const bgMusic = document.getElementById('bg-music');
+        const fireworksContainer = document.getElementById('fireworks-container');
+        const cakeContainer = document.getElementById('cake-container');
 
-            // Switch cake after 3.5s then fireworks
-            setTimeout(() => {
-                cakeBurn.style.opacity = '0';
-                cakeNormal.style.opacity = '1';
-                // Fireworks
-                function createFirework(xOrigin) {
-                    for (let i = 0; i < 20; i++) {
-                        const spark = document.createElement('div');
-                        spark.classList.add('firework');
-                        const angle = Math.random() * 2 * Math.PI;
-                        const radius = 100 + Math.random() * 50;
-                        const dx = Math.cos(angle) * radius + 'px';
-                        const dy = Math.sin(angle) * radius + 'px';
-                        spark.style.setProperty('--dx', dx);
-                        spark.style.setProperty('--dy', dy);
-                        spark.style.left = xOrigin + 'px';
-                        spark.style.bottom = '50px';
-                        fireworksContainer.appendChild(spark);
-                        spark.addEventListener('animationend', () => spark.remove());
-                    }
+        // Show cake container after age appears
+        setTimeout(() => {
+            cakeContainer.style.opacity = '1';
+        }, 3500);
+
+        // After showing cake2, switch to cake-burning
+        setTimeout(() => {
+            cakeBurn.style.opacity = '1';
+            cake2.style.opacity = '0';
+            bgMusic.pause();
+            fireSound.play();
+            startFireworks();
+        }, 7000);
+
+        function startFireworks() {
+            const cakeRect = cakeContainer.getBoundingClientRect();
+            const centerX = cakeRect.left + cakeRect.width / 2;
+            const centerY = cakeRect.top + cakeRect.height / 2;
+            const colors = ['#FF0000', '#FF8C00', '#FFFF00', '#ADFF2F', '#00FFFF', '#1E90FF', '#DA70D6', '#FF1493', '#00FF7F', '#FFD700'];
+
+            function createFirework(xOrigin, direction) {
+                for (let i = 0; i < 80; i++) {
+                    const spark = document.createElement('div');
+                    spark.classList.add('firework');
+                    let angle;
+                    if (direction === 1) angle = Math.random() * (Math.PI / 2) - (Math.PI / 4);
+                    else angle = Math.random() * (Math.PI / 2) + (3 * Math.PI / 4);
+                    const radius = 120 + Math.random() * 60;
+                    const dx = Math.cos(angle) * radius + 'px';
+                    const dy = -Math.sin(angle) * radius + 'px';
+                    spark.style.setProperty('--dx', dx);
+                    spark.style.setProperty('--dy', dy);
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    spark.style.setProperty('--color', color);
+                    spark.style.left = (xOrigin) + 'px';
+                    spark.style.top = (centerY) + 'px';
+                    fireworksContainer.appendChild(spark);
+                    spark.addEventListener('animationend', () => spark.remove());
                 }
-                const fireInterval = setInterval(() => {
-                    const leftX = window.innerWidth * 0.2;
-                    const rightX = window.innerWidth * 0.8;
-                    createFirework(leftX);
-                    createFirework(rightX);
-                }, 500);
-                setTimeout(() => {
-                    clearInterval(fireInterval);
-                    window.location.href = 'deotainghe.html';
-                }, 5000);
-            }, 3500);
-        });
+            }
+
+            const interval = setInterval(() => {
+                createFirework(centerX - 180, 1);
+                createFirework(centerX + 180, -1);
+            }, 400);
+            setTimeout(() => clearInterval(interval), 3000);
+        }
     </script>
 </body>
 
