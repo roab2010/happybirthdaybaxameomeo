@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Nguyễn Thị Phương Thảo 🎉</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            background: #333;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+            color: #ddd;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        /* Title styling */
+        h1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 3rem;
+            color: #FFC107;
+            margin-bottom: 0.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #eee;
+            margin-bottom: 2rem;
+        }
+
+        /* Cake styling */
+        #cake-container {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            margin-bottom: 2rem;
+        }
+
+        .cake-base {
+            position: absolute;
+            bottom: 0;
+            width: 200px;
+            height: 120px;
+            background: #5D4037;
+            border-radius: 0 0 20px 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .cake-frosting {
+            position: absolute;
+            bottom: 110px;
+            width: 220px;
+            height: 60px;
+            background: #fafafa;
+            border-radius: 20px 20px 0 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Candle styling */
+        .candle {
+            position: absolute;
+            bottom: 170px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 70px;
+            background: #ffffff;
+            border: 2px solid #ff9800;
+            border-radius: 2px;
+            cursor: pointer;
+            overflow: visible;
+        }
+
+        .candle:before {
+            content: "21";
+            position: absolute;
+            top: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            color: #ff9800;
+            font-weight: bold;
+        }
+
+        .flame {
+            position: absolute;
+            top: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 18px;
+            background: radial-gradient(circle at 50% 0%, #ffeb3b, #f57f17);
+            border-radius: 50%;
+            animation: flicker 0.2s infinite;
+        }
+
+        @keyframes flicker {
+
+            0%,
+            100% {
+                transform: translateX(-50%) scaleY(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: translateX(-50%) scaleY(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        /* Confetti styling */
+        .confetti {
+            position: absolute;
+            width: 6px;
+            height: 12px;
+            opacity: 0.9;
+            transform-origin: center;
+            animation: confetti-fall 2s linear forwards, confetti-swing 0.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(200px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes confetti-swing {
+            0% {
+                transform: rotate(-10deg);
+            }
+
+            100% {
+                transform: rotate(10deg);
+            }
+        }
+
+        /* Fireworks styling */
+        .firework {
+            position: absolute;
+            bottom: 0;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, white, transparent);
+            border-radius: 50%;
+            opacity: 0;
+            animation: explode 1s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(var(--dx), var(--dy)) scale(0);
+            }
+        }
+
+        /* Girlfriend reveal styling */
+        #gf-reveal {
+            position: absolute;
+            bottom: 10px;
+            width: 180px;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 2s ease-in;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Title -->
+        <h1>Happy Birthday</h1>
+        <h2>Nguyễn Thị Phương Thảo</h2>
+        <!-- Cake and Candle -->
+        <div id="cake-container">
+            <div class="cake-frosting"></div>
+            <div class="cake-base"></div>
+            <div class="candle" id="candle">
+                <div class="flame" id="flame"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fireworks container -->
+    <div id="fireworks-container"></div>
+    <!-- Girlfriend image (placeholder) -->
+    <img id="gf-reveal" src="https://via.placeholder.com/180.png?text=Th%C3%A3o" alt="Bạn gái hiện ra">
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const candle = document.getElementById('candle');
+            const flame = document.getElementById('flame');
+            const cakeContainer = document.getElementById('cake-container');
+            const fireworksContainer = document.getElementById('fireworks-container');
+            const gfReveal = document.getElementById('gf-reveal');
+
+            // Function to generate confetti around cake continuously
+            function generateConfetti() {
+                const colors = ['#F44336', '#E91E63', '#9C27B0', '#3F51B5', '#03A9F4', '#4CAF50', '#FFEB3B', '#FF9800', '#795548', '#607D8B'];
+                const confetti = document.createElement('div');
+                const size = 6 + Math.random() * 6;
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size * 2}px`;
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                const xPos = cakeContainer.offsetLeft + cakeContainer.offsetWidth * (0.3 + Math.random() * 0.4);
+                confetti.style.left = `${xPos}px`;
+                confetti.style.top = `${cakeContainer.offsetTop}px`;
+                confetti.classList.add('confetti');
+                document.body.appendChild(confetti);
+                setTimeout(() => { confetti.remove(); }, 2000);
+            }
+            // Generate confetti every 150ms
+            setInterval(generateConfetti, 150);
+
+            function createFirework(xOrigin) {
+                for (let i = 0; i < 20; i++) {
+                    const spark = document.createElement('div');
+                    spark.classList.add('firework');
+                    const angle = Math.random() * 2 * Math.PI;
+                    const radius = 150 + Math.random() * 50;
+                    const dx = Math.cos(angle) * radius + 'px';
+                    const dy = Math.sin(angle) * radius + 'px';
+                    spark.style.setProperty('--dx', dx);
+                    spark.style.setProperty('--dy', dy);
+                    spark.style.left = xOrigin + 'px';
+                    spark.style.bottom = '200px';
+                    fireworksContainer.appendChild(spark);
+                    spark.addEventListener('animationend', () => spark.remove());
+                }
+            }
+
+            candle.addEventListener('click', () => {
+                flame.style.display = 'none';
+                setTimeout(() => { cakeContainer.style.display = 'none'; }, 500);
+                const leftX = window.innerWidth * 0.2;
+                const rightX = window.innerWidth * 0.8;
+                createFirework(leftX);
+                createFirework(rightX);
+                setTimeout(() => { gfReveal.style.opacity = '1'; }, 1000);
+            });
+        });
+    </script>
+</body>
+
+</html>
