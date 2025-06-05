@@ -37,7 +37,6 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 999;
         }
 
         #startBtn,
@@ -165,7 +164,7 @@
         <p id="typewriter"></p>
     </div>
 
-    <audio id="bgMusic" src="/assset/music/loveis.mp3" type="audio/mpeg" loop></audio>
+    <audio id="bgMusic" src="/assset/music/loveis.mp3" preload="auto" playsinline loop></audio>
 
     <script>
         const videoList = [
@@ -236,7 +235,10 @@
             videoElement.style.display = 'none';
             letter.classList.add('show');
             bgMusic.volume = 0.2;
-            bgMusic.play();
+            bgMusic.play().catch(e => {
+                alert("🔇 Vui lòng bật tiếng và tắt chế độ im lặng để nghe nhạc nha 💕");
+                console.warn("Không thể phát nhạc:", e);
+            });
             typeMessage(`Hôm nay là một ngày đặc biệt, và anh chỉ muốn nói rằng...\n
 Anh cảm ơn em vì đã đồng hành cùng anh, vì nụ cười, vì ánh mắt và cả những lần dỗi hờn dễ thương nữa 😚\n\n
 Chúc bà xã của anh luôn xinh đẹp, vui vẻ và hạnh phúc trọn đời nha 💐\n
@@ -250,6 +252,7 @@ Anh sẽ luôn cố gắng mỗi ngày để xứng đáng hơn với em. Yêu e
             playVideo(currentIndex);
             bgMusic.volume = 0.05;
             bgMusic.play().catch(e => {
+                alert("🔇 Vui lòng bật tiếng và tắt chế độ im lặng để nghe nhạc nha 💕");
                 console.warn("Không thể phát nhạc:", e);
             });
         };
