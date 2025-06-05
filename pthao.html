@@ -2,16 +2,18 @@
 <html lang="vi">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday 🎉</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap"
-        rel="stylesheet">
+    <!-- Google Fonts: Pacifico, iCiel Crocante -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=iCiel+Crocante&display=swap"
+        rel="stylesheet" />
     <style>
         body {
             background: #333333;
-            font-family: 'Roboto', sans-serif;
+            /* Nền xám đậm */
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             overflow: hidden;
             text-align: center;
@@ -19,74 +21,84 @@
         }
 
         .container {
+            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
+            padding: 1rem;
         }
 
-        .fade-in {
+        /* Common fade-zoom animation */
+        .fade-zoom {
             opacity: 0;
             transform: scale(0.8);
-            animation: fadeIn 1s forwards;
+            animation-fill-mode: forwards;
         }
 
-        .delay-1 {
-            animation-delay: 0.5s;
-        }
-
-        .delay-2 {
-            animation-delay: 2s;
-        }
-
-        .delay-3 {
-            animation-delay: 3.5s;
-        }
-
-        .delay-4 {
-            animation-delay: 5s;
-        }
-
-        .delay-5 {
-            animation-delay: 7s;
-        }
-
-        .delay-6 {
-            animation-delay: 9s;
-        }
-
-        .delay-7 {
-            animation-delay: 12s;
-        }
-
-        .delay-8 {
-            animation-delay: 14s;
-        }
-
-        @keyframes fadeIn {
+        @keyframes zoomIn {
             to {
-                opacity: 1;
                 transform: scale(1);
+                opacity: 1;
             }
         }
 
-        .title {
+        /* Happy BirthDay */
+        #title {
             font-family: 'Pacifico', cursive;
-            font-size: 5rem;
+            font-size: 3.5rem;
             color: #FF4500;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            margin-bottom: 0.5rem;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: zoomIn 0.8s ease-out forwards;
+            animation-delay: 0.5s;
         }
 
-        .name {
-            font-size: 4rem;
-            font-weight: bold;
-            background: linear-gradient(270deg, #1E90FF, #00BFFF, #1E90FF);
-            background-size: 600% 600%;
+        /* Nguyễn Thị Phương Thảo: font iCiel Crocante, gradient xanh dương, stroke đen */
+        #subtitle {
+            font-family: 'iCiel Crocante', sans-serif;
+            font-size: 2.8rem;
+            background: linear-gradient(90deg, #1E90FF, #00BFFF, #1E90FF);
+            background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: gradientMove 6s ease infinite;
+            animation: gradientMove 3s ease infinite;
+            -webkit-text-stroke: 1px #000000;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: zoomIn 0.8s ease-out forwards;
+            animation-delay: 2s;
         }
+
+        /* Alert "Thổi nến i bà chả" - màu hồng */
+        #pink-alert {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            max-width: 280px;
+            background-color: #ffe6f0;
+            border-left: 4px solid #ec4899;
+            color: #831843;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transform: translateX(100%);
+            opacity: 0;
+            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+            z-index: 9999;
+            font-size: 0.875rem;
+        }
+
+        #pink-alert.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
 
         @keyframes gradientMove {
             0% {
@@ -102,17 +114,32 @@
             }
         }
 
-        .age {
-            font-size: 4rem;
-            color: #FFD700;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+        /* 24 Tuổi: font iCiel Crocante, gradient vàng, stroke đen */
+        #age {
+            font-family: 'iCiel Crocante', sans-serif;
+            font-size: 2.8rem;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientMove 3s ease infinite;
+            -webkit-text-stroke: 1px #000000;
+            /* Viền đen */
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: zoomIn 0.8s ease-out forwards;
+            animation-delay: 3.5s;
         }
 
+
+
+        /* Cake container: ẩn/hiện từng ảnh */
         #cake-container {
             position: relative;
             width: 350px;
             height: 350px;
-            margin: 2rem 0;
+            margin-bottom: 1rem;
         }
 
         #cake-container img {
@@ -122,8 +149,49 @@
             width: 100%;
             height: auto;
             transition: opacity 0.5s;
+            opacity: 0;
         }
 
+        /* Thông điệp “Bà xã đeo tai nghe vô đi”: màu trắng */
+        #message {
+            font-family: 'iCiel Crocante', sans-serif;
+            font-size: 2rem;
+            color: #FFFFFF;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-top: 2rem;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: zoomIn 0.8s ease-out forwards;
+            animation-delay: 13s;
+        }
+
+        /* Nút “Bà xã đeo gòi”: font iCiel Crocante, màu trắng viền xanh dương */
+        #btn-container {
+            margin-top: 1rem;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: zoomIn 0.8s ease-out forwards;
+            animation-delay: 15s;
+        }
+
+        #btn-container button {
+            font-family: 'iCiel Crocante', sans-serif;
+            background: transparent;
+            border: 2px solid #00BFFF;
+            color: #FFFFFF;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        #btn-container button:hover {
+            transform: scale(1.05);
+            background-color: rgba(0, 191, 255, 0.1);
+        }
+
+        /* Fireworks container */
         #fireworks-container {
             position: absolute;
             top: 0;
@@ -131,13 +199,13 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
+            overflow: hidden;
         }
 
         .firework {
             position: absolute;
-            width: 8px;
-            height: 8px;
-            background: transparent;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
             opacity: 0;
             animation: explode 1s ease-out forwards;
@@ -163,108 +231,161 @@
                 transform: translate(var(--dx), var(--dy)) scale(0);
             }
         }
-
-        .message,
-        .button {
-            font-size: 2rem;
-            color: #fff;
-            margin-top: 1rem;
-            opacity: 0;
-        }
-
-        .button button {
-            margin-top: 1rem;
-            padding: 0.75rem 1.5rem;
-            font-size: 1.5rem;
-            background: #1E90FF;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .button button:hover {
-            background: #63b3ed;
-        }
     </style>
 </head>
 
 <body>
-    <audio id="bg-music" src="/assset/music/nhacsinhnhat.mp3" loop autoplay></audio>
-    <audio id="fire-sound" src="/assset/music/firesound.mp3"></audio>
+    <!-- Nhạc nền sinh nhật -->
+    <audio id="bg-music" src="/assset/music/nhacsinhnhat.mp3" autoplay loop></audio>
+    <!-- Nhạc pháo hoa -->
+    <audio id="firework-music" src="/assset/music/firesound.mp3"></audio>
 
     <div class="container">
-        <div class="title fade-in delay-1">Happy BirthDay</div>
-        <div class="name fade-in delay-2">Nguyễn Thị Phương Thảo</div>
-        <div class="age fade-in delay-3">21 Tuổi</div>
+        <!-- 1) Happy BirthDay -->
+        <h1 id="title">Happy BirthDay</h1>
+        <!-- 2) Nguyễn Thị Phương Thảo (gradient xanh dương + stroke đen) -->
+        <div id="subtitle" class="fade-zoom">Nguyễn Thị Phương Thảo</div>
+        <!-- 3) 24 Tuổi (gradient vàng + stroke đen) -->
+        <div id="age" class="fade-zoom">21 Tuổi</div>
 
-        <div id="cake-container" class="fade-in delay-4" style="opacity:0;">
-            <img src="/assset/images/banhkem2.png" alt="Cake" id="cake2" style="opacity:1;">
-            <img src="/assset/images/banhkem.png" alt="Cake Burning" id="cake-burning" style="opacity:0;">
+
+        <!-- 4) Bánh kem -->
+        <div id="cake-container">
+            <!-- Bánh bình thường (banhkem2) -->
+            <img src="/assset/images/banhkem2.png" alt="Cake Normal" id="cake-normal" />
+            <!-- Bánh đang cháy (banhkem) -->
+            <img src="/assset/images/banhkem.png" alt="Cake Burning" id="cake-burning" />
         </div>
 
-        <div id="fireworks-container"></div>
-        <div id="msg" class="message fade-in delay-7">Bà xã đeo tai nghe AirPods oxa tặng vô đi đã</div>
-        <div id="btn-wrap" class="button fade-in delay-8"><button onclick="window.location.href='deotainghe.html'">Dạ em
-                đeo gòi</button></div>
+        <!-- 7) Thông điệp cuối cùng “Bà xã đeo tai nghe vô đi” (màu trắng) -->
+        <div id="message" class="fade-zoom">Bà xã đeo tai nghe vô đi</div>
+
+        <!-- 8) Nút chuyển trang “Bà xã đeo gòi” (viền xanh dương, chữ trắng) -->
+        <div id="btn-container">
+            <button id="continue-btn">Bà xã đeo gòi</button>
+        </div>
     </div>
 
+    <!-- Fireworks -->
+    <div id="fireworks-container"></div>
+
+    <!-- Alert màu hồng -->
+    <div id="pink-alert">
+        🎂 Thổi nến i bà chả 🎂
+    </div>
+
+
     <script>
-        const cake2 = document.getElementById('cake2');
-        const cakeBurn = document.getElementById('cake-burning');
-        const fireSound = document.getElementById('fire-sound');
-        const bgMusic = document.getElementById('bg-music');
-        const fireworksContainer = document.getElementById('fireworks-container');
-        const cakeContainer = document.getElementById('cake-container');
+        document.addEventListener('DOMContentLoaded', () => {
+            const subtitle = document.getElementById('subtitle');
+            const age = document.getElementById('age');
+            const cakeNormal = document.getElementById('cake-normal');
+            const cakeBurning = document.getElementById('cake-burning');
+            const message = document.getElementById('message');
+            const btnContainer = document.getElementById('btn-container');
+            const continueBtn = document.getElementById('continue-btn');
+            const fireworksContainer = document.getElementById('fireworks-container');
+            const bgMusic = document.getElementById('bg-music');
+            const fireworkMusic = document.getElementById('firework-music');
 
-        // Show cake container after age appears
-        setTimeout(() => {
-            cakeContainer.style.opacity = '1';
-        }, 3500);
+            // 2) Hiện “Nguyễn Thị Phương Thảo” tại 2s
+            setTimeout(() => {
+                subtitle.style.opacity = '1';
+                subtitle.style.animation = 'zoomIn 0.8s ease-out forwards';
+            }, 2000);
 
-        // After showing cake2, switch to cake-burning
-        setTimeout(() => {
-            cakeBurn.style.opacity = '1';
-            cake2.style.opacity = '0';
-            bgMusic.pause();
-            fireSound.play();
-            startFireworks();
-        }, 7000);
+            // 3) Hiện “24 Tuổi” tại 3.5s
+            setTimeout(() => {
+                age.style.opacity = '1';
+                age.style.animation = 'zoomIn 0.8s ease-out forwards';
+            }, 3500);
 
-        function startFireworks() {
-            const cakeRect = cakeContainer.getBoundingClientRect();
-            const centerX = cakeRect.left + cakeRect.width / 2;
-            const centerY = cakeRect.top + cakeRect.height / 2;
-            const colors = ['#FF0000', '#FF8C00', '#FFFF00', '#ADFF2F', '#00FFFF', '#1E90FF', '#DA70D6', '#FF1493', '#00FF7F', '#FFD700'];
 
-            function createFirework(xOrigin, direction) {
-                for (let i = 0; i < 80; i++) {
-                    const spark = document.createElement('div');
-                    spark.classList.add('firework');
-                    let angle;
-                    if (direction === 1) angle = Math.random() * (Math.PI / 2) - (Math.PI / 4);
-                    else angle = Math.random() * (Math.PI / 2) + (3 * Math.PI / 4);
-                    const radius = 120 + Math.random() * 60;
-                    const dx = Math.cos(angle) * radius + 'px';
-                    const dy = -Math.sin(angle) * radius + 'px';
-                    spark.style.setProperty('--dx', dx);
-                    spark.style.setProperty('--dy', dy);
-                    const color = colors[Math.floor(Math.random() * colors.length)];
-                    spark.style.setProperty('--color', color);
-                    spark.style.left = (xOrigin) + 'px';
-                    spark.style.top = (centerY) + 'px';
-                    fireworksContainer.appendChild(spark);
-                    spark.addEventListener('animationend', () => spark.remove());
+
+            // 4) Hiện bánh kem bình thường (banhkem2) ngay lập tức
+            cakeNormal.style.opacity = '1';
+
+            // 5) Sau 2.5s: ẩn banhkem2, hiển thị banhkem đang cháy
+            setTimeout(() => {
+                cakeNormal.style.opacity = '0';
+                cakeBurning.style.opacity = '1';
+            }, 2500);
+
+            // Hiện alert "Thổi nến i bà chả"
+            const pinkAlert = document.getElementById('pink-alert');
+            pinkAlert.classList.add('show');
+
+            // Ẩn sau 3s
+            setTimeout(() => {
+                pinkAlert.classList.remove('show');
+            }, 3000);
+
+
+            // 6) Sau 5s kể từ lúc bánh kem đang cháy: ẩn bánh đang cháy, hiện lại banhkem2, dừng nhạc sinh nhật, phát nhạc pháo hoa, nổ pháo hoa 5s
+            setTimeout(() => {
+                cakeBurning.style.opacity = '0';
+                cakeNormal.style.opacity = '1';
+                // Dừng nhạc sinh nhật
+                bgMusic.pause();
+                // Phát nhạc pháo hoa
+                fireworkMusic.currentTime = 0;
+                fireworkMusic.play();
+
+                // Bắt đầu pháo hoa
+                const cakeRect = cakeNormal.getBoundingClientRect();
+                const centerX = cakeRect.left + cakeRect.width / 2;
+                const centerY = cakeRect.top + cakeRect.height / 2;
+                const colors = ['#FF0000', '#FF8C00', '#FFFF00', '#ADFF2F', '#00FFFF', '#1E90FF', '#DA70D6', '#FF1493'];
+
+                function createFirework(xOrigin, direction) {
+                    for (let i = 0; i < 80; i++) {
+                        const spark = document.createElement('div');
+                        spark.classList.add('firework');
+                        let angle;
+                        if (direction === 1) {
+                            angle = (Math.random() * (Math.PI / 2)) - (Math.PI / 4);
+                        } else {
+                            angle = (Math.random() * (Math.PI / 2)) + (3 * Math.PI / 4);
+                        }
+                        const radius = 150 + Math.random() * 50;
+                        const dx = Math.cos(angle) * radius + 'px';
+                        const dy = -Math.sin(angle) * radius + 'px';
+                        spark.style.setProperty('--dx', dx);
+                        spark.style.setProperty('--dy', dy);
+                        const color = colors[Math.floor(Math.random() * colors.length)];
+                        spark.style.setProperty('--color', color);
+                        spark.style.left = xOrigin + 'px';
+                        spark.style.top = centerY + 'px';
+                        fireworksContainer.appendChild(spark);
+                        spark.addEventListener('animationend', () => spark.remove());
+                    }
                 }
-            }
 
-            const interval = setInterval(() => {
-                createFirework(centerX - 180, 1);
-                createFirework(centerX + 180, -1);
-            }, 400);
-            setTimeout(() => clearInterval(interval), 3000);
-        }
+                // Tạo interval pháo hoa 5s
+                let fireInterval = setInterval(() => {
+                    createFirework(centerX - cakeRect.width / 2 - 20, 1);
+                    createFirework(centerX + cakeRect.width / 2 + 20, -1);
+                }, 300);
+
+                setTimeout(() => {
+                    clearInterval(fireInterval);
+                    // 7) Sau 5s pháo hoa: hiện thông điệp
+                    message.style.opacity = '1';
+                    message.style.animation = 'zoomIn 0.8s ease-out forwards';
+
+                    // 8) Sau 2s: hiện nút
+                    setTimeout(() => {
+                        btnContainer.style.opacity = '1';
+                        btnContainer.style.animation = 'zoomIn 0.8s ease-out forwards';
+                    }, 2000);
+                }, 5000);
+            }, 7500); // 2.5s (bánh cháy) + 5s pháo hoa
+
+            // 9) Khi nhấn nút “Bà xã đeo gòi”, chuyển trang
+            continueBtn.addEventListener('click', () => {
+                window.location.href = 'deotainghe.html';
+            });
+        });
     </script>
 </body>
 
