@@ -4,16 +4,17 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bà xã nhập tài khoản mật khẩu mà bà xã nghĩ là đúng vào đây iiii</title>
+    <title>Đăng Nhập</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Font: Roboto -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
             position: relative;
             overflow: hidden;
-            background: linear-gradient(to bottom right, #ffe6f0, #f8d3e3);
+            background: #E0FFFF;
             font-family: "Roboto", sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
         .fade-in {
@@ -27,15 +28,13 @@
             }
         }
 
-        /* Background bouncing images */
         .gf-img {
             position: absolute;
-            width: 100px;
+            width: 80px;
             height: auto;
             z-index: -10;
         }
 
-        /* Zoom effect for hovered elements */
         .zoom-on-hover {
             transition: transform 0.2s ease;
         }
@@ -44,16 +43,15 @@
             transform: scale(1.05);
         }
 
-        /* Alert styling */
         #success-alert {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            max-width: 300px;
+            top: 16px;
+            right: 16px;
+            max-width: 280px;
             background-color: #e6ffea;
             border-left: 4px solid #22c55e;
             color: #166534;
-            padding: 1rem;
+            padding: 0.75rem;
             border-radius: 0.5rem;
             display: flex;
             align-items: center;
@@ -62,6 +60,7 @@
             opacity: 0;
             transition: transform 0.5s ease-out, opacity 0.5s ease-out;
             z-index: 50;
+            font-size: 0.875rem;
         }
 
         #success-alert.error {
@@ -75,11 +74,10 @@
             opacity: 1;
         }
 
-        /* Heart animation */
         .heart {
             position: absolute;
             color: #ec4067;
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             opacity: 1;
             animation: floatUp 1s ease-out forwards;
             pointer-events: none;
@@ -87,51 +85,89 @@
 
         @keyframes floatUp {
             to {
-                transform: translateY(-50px);
+                transform: translateY(-40px);
                 opacity: 0;
             }
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            text-align: center;
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: #0072ff;
+            text-align: center;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        a.forgot {
+            color: #00BFFF;
+            font-size: 0.875rem;
+        }
+
+        a.forgot:hover {
+            color: #1E90FF;
+        }
+
+        button.login-btn {
+            background-color: #00BFFF;
+            font-size: 1rem;
+        }
+
+        button.login-btn:hover {
+            background-color: #1E90FF;
+        }
+
+        label {
+            color: #333333;
+            font-size: 1rem;
+        }
+
+        input {
+            background-color: #ffffff;
+            font-size: 1rem;
         }
     </style>
 </head>
 
 <body class="min-h-screen flex flex-col items-center justify-center p-4">
-    <!-- Two bouncing girlfriend images -->
-    <img src="/assset/images/pthaobr1.png" alt="Bạn gái 1" class="gf-img" id="gf-img1" />
-    <img src="/assset/images/pthaobr2.png" alt="Bạn gái 2" class="gf-img" id="gf-img2" />
+    <img src="/asset/images/pthaobr1.png" alt="Bạn gái 1" class="gf-img" id="gf-img1" />
+    <img src="/asset/images/pthaobr2.png" alt="Bạn gái 2" class="gf-img" id="gf-img2" />
 
-    <!-- Heading ngoài form -->
-    <h1
-        class="text-4xl md:text-5xl font-extrabold text-center mb-2 bg-gradient-to-r from-red-500 to-pink-500 bg-clip-text text-transparent drop-shadow-lg">
-        Đăng Nhập iiiiii
-    </h1>
-    <p class="text-base md:text-lg text-pink-600 italic text-center mb-6 drop-shadow">
-        Nhập tk mk mà cục bé nghĩ iii 👇
-    </p>
+    <h1 class="fade-in">Đăng Nhập iiiiii</h1>
+    <p class="fade-in">Nhập tk mk mà cục bé nghĩ iii 👇</p>
 
-    <div class="bg-white/80 backdrop-blur-lg shadow-xl rounded-2xl p-6 w-full max-w-sm fade-in">
+    <div class="bg-white/80 backdrop-blur-lg shadow-xl rounded-2xl p-5 w-full max-w-xs fade-in">
         <form id="loginForm" class="space-y-4">
             <div>
-                <label for="email" class="block text-base text-gray-700 font-medium zoom-on-hover">Email</label>
+                <label for="email" class="block text-gray-700 font-medium zoom-on-hover">Email</label>
                 <input type="email" id="email"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-base zoom-on-hover"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 zoom-on-hover"
                     placeholder="yourname@gmail.com" required />
             </div>
             <div>
                 <div class="flex justify-between items-center">
-                    <label for="password" class="block text-base text-gray-700 font-medium zoom-on-hover">Mật
-                        khẩu</label>
-                    <a href="#" id="forgotLink" class="text-sm text-red-500 hover:underline zoom-on-hover">Quên mật
-                        khẩu?</a>
+                    <label for="password" class="text-gray-700 font-medium zoom-on-hover">Mật khẩu</label>
+                    <a href="#" id="forgotLink" class="forgot hover:underline zoom-on-hover">Quên mật khẩu?</a>
                 </div>
                 <input type="password" id="password"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-base zoom-on-hover"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300 zoom-on-hover"
                     placeholder="********" required />
             </div>
-            <div class="relative"> <!-- container for button and hearts -->
+            <div class="relative">
                 <button type="submit" id="loginButton"
-                    class="w-full py-3 px-4 bg-red-600 hover:bg-red-700 text-white rounded-xl transition zoom-on-hover duration-300 shadow-lg font-medium text-base">
-                    Đăng nhập
-                </button>
+                    class="login-btn w-full py-2 rounded-lg text-white shadow-md transition zoom-on-hover">Đăng
+                    nhập</button>
             </div>
         </form>
     </div>
@@ -142,20 +178,18 @@
             const forgotLink = document.getElementById('forgotLink');
             const loginButton = document.getElementById('loginButton');
             const imgs = [
-                { el: document.getElementById('gf-img1'), dx: 2, dy: 2 },
-                { el: document.getElementById('gf-img2'), dx: -2, dy: 2 }
+                { el: document.getElementById('gf-img1'), dx: 1.5, dy: 1.5 },
+                { el: document.getElementById('gf-img2'), dx: -1.5, dy: 1.5 }
             ];
 
-            // Initialize positions at random
             imgs.forEach(item => {
                 const el = item.el;
-                const startX = Math.random() * (window.innerWidth - 100);
-                const startY = Math.random() * (window.innerHeight - 100);
+                const startX = Math.random() * (window.innerWidth - 80);
+                const startY = Math.random() * (window.innerHeight - 80);
                 el.style.left = startX + 'px';
                 el.style.top = startY + 'px';
             });
 
-            // Move and bounce images
             function moveImages() {
                 imgs.forEach(item => {
                     const el = item.el;
@@ -177,12 +211,10 @@
             }
             requestAnimationFrame(moveImages);
 
-            // Alert box
             const alertBox = document.createElement('div');
             alertBox.id = 'success-alert';
             document.body.appendChild(alertBox);
 
-            // Handle forgot password click
             forgotLink.addEventListener('click', e => {
                 e.preventDefault();
                 alertBox.className = 'error';
@@ -191,7 +223,6 @@
                 setTimeout(() => { alertBox.classList.remove('show'); }, 2500);
             });
 
-            // Handle form submission
             form.addEventListener('submit', e => {
                 e.preventDefault();
                 const email = form.querySelector('input[type="email"]').value.trim();
@@ -199,7 +230,6 @@
                 if (!email || !password) { alert('Vui lòng điền đầy đủ thông tin.'); return; }
 
                 if (email === 'ngpthao04@gmail.com' && password === 'BaoyeuThao1724@') {
-                    // Create hearts around button
                     for (let i = 0; i < 8; i++) {
                         const heart = document.createElement('div');
                         heart.classList.add('heart');
